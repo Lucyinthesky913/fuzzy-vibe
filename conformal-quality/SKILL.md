@@ -2,6 +2,8 @@
 name: conformal-quality
 description: the definition of the conformal quality. use when defining the cost function or test the quality of conformal symmetry.
 ---
+# expectation management
+Unless specified, we can only expect a good energy spectrum (through state-operator correspondence) at the good data point. OPE coefficients, correlation functions' scaling behavior and conformal generators are not expected to behave well even at the good data point.
 
 # conformal tower
 In the sphere, the state-operator correspondence will make the energy gap $E-E_0 \propto v \Delta/R$, where $E_0$ is the ground state energy and $v$ is model-dependent (even sizes), $R$ is the radius and $\Delta$ is the scaling dimension. The primary field/state is the highest-weight representation of the conformal group. We can use conformal generators to raise the energy levels as $\Delta\to \Delta+n (n\in N)$, where we can call $n$ the descendant level. States/fields with $n> 0$ is the descants of the primary. For 3D CFT, the generators are just $\partial_1\partial_2\dots$. For example, a primary $\phi$ with spin-0 will have a $\partial \phi$ descendant with spin-1, a $\partial^2\phi$ with spin-0 and a $\partial_\mu\partial_\nu \phi$ with spin-2. The levels are $1,2,2$ correspondingly. There are infinte descendants. This structure, equal-space on the energy spectrum, is a strong sign for conformal symmetry and is easy to extract (compared to scaling behavior of correlation functions).
@@ -27,4 +29,6 @@ It's possible some low-lying states are not CFT state or some states violate the
 
 # what cannot serve as good data
 
-Due to numerical accessibility, the scaling behavior of correlators $\langle O(x)O(y)\rangle \sim |x-y|^{-2\Delta_O}$ is not a good data. The scaling dimension obtained in this way is much less precise than that of energy level and state-operator correspondence. 
+Due to numerical accessibility, the scaling behavior of correlators $\langle O(x)O(y)\rangle \sim |x-y|^{-2\Delta_O}$ is not a good data. The scaling dimension obtained in this way is much less precise than that of energy level and state-operator correspondence.
+
+To use conformal generators or rasing/lowering operators is not a good choice. Even in a good critical CFT data point, this test may also fail.
