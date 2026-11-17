@@ -1,40 +1,40 @@
 ---
 name: ed-coding
-description: Build or review reusable fuzzy-sphere exact-diagonalization code, Hamiltonian matrices, sector solvers, and observables. Use when implementing calculations or extending an existing numerical code.
+description: present a coding standard as an advice. Use it when starting arrange coding jobs for exact-diagonalization, dmrg calculation and extracting data and further jobs.
 ---
 
-# Choose the implementation
+# coding standard
+**This coding standard serves as an advice.**
 
-Use the project's established language and verified solver when available. For an unconstrained new implementation, Julia with FuzzifiED is a suitable default; ask about the language only when the choice materially affects the work and is not already known. The structure below is advice, not a requirement to rewrite working code.
+## default choice
+Ask the user first on what programming language he/she wants. The default choice is using FuzzifiED julia package. Even for other choices, the julia package can often be used to check whether the codes using other languages are right.
 
-Use the [bundled FuzzifiED documentation](references/FuzzifiED/FuzzifiED.jl-main/README.md), checking that the examples match the package version actually used. Record the environment rather than assuming that documentation for another version is compatible.
+## core code
+The core code is an exact-diagonalization code, which should be composed using julia with FuzzifiED. First, there should be a file, as a module, containing:
+* Generating the matrix element of the Hamiltonian
+* Generating the matrix element of the observables needed
+* Exact Diagonalization
+* Getting observables
+* sending out desired data
 
-# Structure reusable code
+The Hamiltonian part should be structured as:
+* Generating basis
+* Generating necessary terms
+* Spaces for additional irrelevant terms
 
-Separate the following responsibilities where useful:
+The module, or the core function, should at least accept:
+* monopole strength (i.e. system size) with the convention $N=2s+1$ and $R=sqrt(N)$
+* values of the coupling constants
+* quantum numbers if you need
+* other parameters you need
 
-- Geometry, bases, statistics, charges, and symmetry blocks.
-- Hamiltonian terms and sparse matrices or matrix-vector actions.
-- Observable matrices, including maps between different sectors.
-- Eigensolvers, observable extraction, and data output.
-- Scan and analysis scripts that call the reusable core.
+If applicable, use SO(3)lver to accelerate the calculation. Another choice is to use the complete $SO(3)$ implemention in **/references/2609.11675v1.pdf**
 
-Accept geometry, couplings, and requested quantum numbers explicitly. Use the project's size convention; the default is N = 2s + 1 and R = sqrt(N). Record the layer-to-orbital and flux map in multilayer systems.
+## other code
+You can use the core code as a module to get data to enable further calculation. The dmrg code, if you really need it, should be in another file since it's very different from the ED code.
 
-Leave interfaces for candidate improvement terms without adding them to the physical model automatically. Keep DMRG-specific code separate when DMRG is actually requested or needed. Derive coefficients through [matrix-element](../matrix-element/SKILL.md).
+## documents
+See /skills/ed-coding/references/FuzzifiED for the package FuzzifiED. Use [matrix-element skill] (./skills/matrix-element/SKILL.md) when generating the matrix element.
 
-# Reduce computational cost deliberately
-
-Use SO(3)lver when applicable. Exact angular-momentum decomposition preserves the states in the selected symmetry sector; an energy cutoff or trial-space projection is a different approximation.
-
-For repeated parameter queries, consider the exact angular-momentum and reduced-basis methods in [the emulation paper](references/2609.11675v1.pdf). Reduced-basis emulation can accelerate searches, but final evidence must cover competing lower states and the claimed spectral window, through full-space calculations or appropriate certification. Small eigenpair residuals alone do not prove that all lower states were found.
-
-Measure representative setup costs, sector dimensions, memory, and per-point solve times before scaling a scan. Reuse cached bases and term matrices and budget threads and memory across simultaneous jobs.
-
-# Verify and record
-
-Check small-system coefficients, spectra, symmetries, and solvable limits as appropriate. An independent implementation or optional independent review can help with subtle constructions; routine edits do not require a new review workflow.
-
-Store geometry, all couplings, basis and truncation status, solver tolerances, actual residuals, requested and returned levels, energy references, and observable normalization with the data. Check eigenvalue tails or otherwise justify completeness in the claimed window, including relevant competing sectors. Retain raw energies when saving normalized spectra.
-
-Record process or session identifiers and terminal outcomes for expensive runs. A partial output file or old log is not evidence that a job is live or complete. Preserve partial data and failures explicitly.
+## independent check
+As an advice, you can create an independent new subagent to review the code. For example, to ensure the matrix element code is right, I will ask 'does the code correctly realize the Hamiltonian?'.

@@ -1,49 +1,68 @@
 ---
 name: tuning
-description: Locate and improve candidate fuzzy-sphere critical parameters using size dependence, low conformal towers, and phase checks. Use for parameter scans or reducing finite-size contamination.
+description: tune parameters and interaction, test the quality of the candidate critical point. Use when search for the critical point.
 ---
 
-# Human workflow
+# human workflow
 
-This is an adaptable search strategy, not a mandatory sequence. Start from the agreed model and a verified implementation. Distinguish transition-driving parameters from candidate improvement couplings. Use [plot](../plot/SKILL.md) to inspect scans and spectra.
+**This is an example for your reference, about how humans search for the critical point.**
 
-# Locate candidate critical regions
+We divide the process into three parts, the relevant parameters, the irrelevant interactions, and the critical point with no transition. If you need visulization, read **skills/plot/SKILL.md**.
 
-With no useful local order parameter, layer occupations, responses, and avoided crossings can guide a rough search. They do not by themselves establish criticality. With an order parameter, use its appropriate finite-size scaling as additional evidence, documenting any scaling dimension used as an input.
 
-At a relativistic critical point, tracked CFT branches approach
+## relevant parameters
 
-    E_n - E_0 = (v/R) [Delta_n + finite-size corrections],
+The relevant parameters are those driving the phase transition. In the language of CFT, they are relevant operators. For multiple relevant parameters, the strategy is very similar to a single one. So we will only talk about a single one in this part. The strategy depends on if there is any local order parameters:
 
-where v is nonuniversal. Follow the project's geometry convention; by default R = sqrt(N), N = 2s + 1. Keep physical couplings and units comparable across sizes and record any derived geometric factors in microscopic coefficients.
+### no local order parameter
 
-Crossings of R(E_n-E_0) and fits of raw gaps versus 1/R locate candidate regions. The exploratory form Delta E = a + b/R is not a universally more accurate test: crossings can drift, corrections can mimic an intercept, and gapless phases or ordered-phase modes can also have vanishing gaps. Compare several labelled branches, fit ranges, and independent phase or operator evidence before claiming an isolated CFT.
+This is quite normal for topological transitions or some transitions beyond Landau-Ginzburg criterion. Other cases may also lack such order parameters.
 
-Multiple relevant directions may require joint tuning or motion on an established critical manifold; fixing one gap crossing does not generally tune the others. For a conformal regime that is not an isolated transition, assess its spectra and scaling without requiring a phase crossing. Supersymmetry alone does not decide which situation applies.
+For a rough search, we can try quantities signifying transitions such as particle number of one certain layer. But as it's not the order parameter, it will be very rough. The best we can use near the critical point is the gap: $\Delta E=E-E_0$, where $E_0$ is the ground state energy. Due to the scaling behavior, we have $\Delta E=\alpha \Delta/L+o(L^{-1})$, where $\Delta$ is the scaling dimension (due to state-operator correspondence, for every state there is a scaling dimension). $\alpha$ is a universal constant independent of sizes. So we can test the quantity $\Delta \tilde{E}=L\Delta E$ at different sizes. If the finite size is small enough, we can see $\Delta \tilde{E}$ of different sizes meet the same value at the critical point for every CFT energy level. A more exact check is by fitting $\Delta E$ versus $1/L$ to the first order (i.e. $\Delta E=a+b/L$ fitting). At the critical point, $a=0$. More commonly, we can only see such phenomena in low-lying states. But we will still conclude it as the critical point.
 
-# Improve the low spectrum
+### with a local order parameter
 
-Define a small, interpretable fitting set and a common energy normalization using [conformal-quality](../conformal-quality/SKILL.md). When affordable, retune relevant parameters for each set of improvement couplings and then compare conformal quality. Joint optimization is also reasonable when independent checks remain available.
+This is quite normal for DQCP and Landau symmetry breaking transitions. Other cases should be checked carefully.
 
-Treat additional couplings as candidate improvements until their RG role is supported. A microscopic interaction can contain both relevant and irrelevant components. Retune relevant directions and recheck [the phases](../phase-check/SKILL.md) after changing it. Explain the symmetry, locality, and intended effect of a proposed new term; respect the user's existing authorization.
+The test for gap is still usable and still a golden standard. Near the critical point, the scaling behavior of the order parameter can be calculated using the scaling dimension (if known). Then we can multiply a factor to remove the size-dependence. The point where the order parmeters of different sizes collapse is the critical point. Sometimes we use it as a cross-check. If we already know the scaling dimension of high accuracy (such as by numerical bootstrap), we expect a good critical point by the collapse.
 
-Prefer a simple Hamiltonian whose unfitted low spectrum develops conformal structure. A useful improvement should lift unwanted branches or improve independent predictions, rather than merely match more chosen eigenvalues.
+For advanced techniques accelerating the process of scanning the phase diagram, see **/references/2609.11675v1.pdf**.
 
-# Avoid over-fitting and reward-hacking
+## irrelevant interactions
 
-- Tune a few identifiable low multiplets. Reserve higher towers, additional sizes, or matrix elements for validation rather than expanding the fitting catalog to manufacture a tower.
-- Count independently selected physical coefficients, including ranges and coefficients fixed after earlier optimization. An overall energy unit is a convention; freezing previously fitted ratios does not erase the selection freedom used to obtain them.
-- Distinguish multiplets from magnetic degeneracies and recognize that descendant relations are correlated constraints. There is no universal safe parameter-to-state ratio.
-- Keep unexplained low states and missing expected states visible alongside fitting residuals. A low cost on a selected subset does not establish a clean spectrum. Do not discard a state merely because it worsens the fit.
-- Compare small-model candidates under stated windows, tolerances, normalization, and assignment rules. Retain failed candidates and useful trade-offs between accuracy and unwanted low levels.
-- Once validation data guide further tuning, record them as development data. Repeatedly inspected sizes are not fresh confirmation. Search ranges, family choices, and changes of the objective also create selection freedom.
+The above only talks about finding a critical point. The irrelevant interactions, in the CFT context known as irrelevant operators, can lower the finite size effects and improve the quality of the conformal data.
 
-A dimension used for calibration, a chosen stress-tensor branch, or a fitted scale is an input to that check, not an independent prediction. Use [gapped](../gapped/SKILL.md) to investigate anomalous branches; a massive state may lie below T at finite size without being harmless for spectral cleanliness.
+If the time cost is applicable, for every chosen set of irrelevant interactions, we should repeat the **relevent parameters** process to get the conformal quality. If not, we just extract the conformal quality for every data point (not necessarily every size). To define and test the quality, you should use the [conformal-quality skill] (./skills/conformal-quality/SKILL.md).
 
-# Choose computations by cost and information
+After getting the conformal quality as a cost function $\delta$, we can treat it as a optimization problem. We define $a_0$ as the relevant parameters and $\vec{a}$ as the irrelevant ones. If we have done the **relevant parmeters** process, the optimization problem is: given $\vec{a}$, we scan $a_0$ to get $\delta(\vec{a})$, then we optimize $\delta(\vec{a})$ to get $\vec{a}$. If we haven't, the problem is to optimize $\delta(a_0,\vec{a})$. It's better if we check $(a_0,\vec{a})$ is a true critical point.
 
-Reuse bases, term matrices, and nearby eigenspaces where valid. Time representative points before a large scan. Smaller sizes or fewer levels can guide exploration, followed by larger or independent checks. Parallelize independent jobs within the memory budget. Use gradients when meaningful derivatives are available; avoid assuming stochastic gradients will resolve noisy assignment-changing costs.
+A more fundamental but not necessarily useful improvent is to add a new irrelevant interaction. The new interaction should respect the symmetry. There is no silver bullet to test whether it's irrelevant rigorously. We make clear the trigger to the transition and treat other interactions as irrelevant. But they may accidentally become relevant. And all in all, the simpler the better (if the conformal quality is good enough).
 
-Consider the [reduced-basis emulation paper](references/2609.11675v1.pdf) for expensive parameter scans, following the distinction between exact symmetry reduction and approximate emulation in [ed-coding](../ed-coding/SKILL.md). Neither an emulator minimum nor a ground-state criterion alone identifies the full conformal spectrum.
+## critical point with no transition
 
-Report complete couplings and conventions, scan bounds, selected states, fitting inputs, individual residuals, unexplained levels, validation results, and size drift. Separate numerical precision from finite-size uncertainty and leave the critical interpretation unresolved when the available evidence cannot distinguish alternatives.
+For some special cases, such as super symmetric CFT, it may not serve as a transition point.
+
+In such cases, we should just run the optimization problem as mentioned in **irrelevant interactions**. We should optimize $\delta(a_0,\vec{a})$. Adding additional irrelevant interactions is still applicable.
+
+
+
+# optimization advices
+
+* The optimization problem is usually a black-box problem.
+* Depending on your choice on sizes, one data point may take a long time.
+* You can use some states or sizes for optimization and others for validation, which will improve the performance.
+* Parallelization is a good choice, but you can also consider methods such as heuristic search and stochastic gradient descent.
+* If the time cost for every shot is too big, you can choose smaller sizes or consider optimization methods for large-time-cost cases.
+* This is just advices. You can choose a better way if you find one.
+
+# phase check
+
+After finding the critical point, you should check if the phases far from the critical point are still right. use [phase-check skill] (./skills/phase-check/SKILL.md).
+
+# to avoid reward-hacking
+Be careful about unconscious reward-hacking. Several cases are known:
+
+* use too many parameters/interactions to fit/optimization a small number of states involved in the cost function
+* involving too many states in the cost function, making the conformal tower more like a result of brute force optimization rather than a true conformal structure.
+
+The key is to find sweet point for low lying states using simple model rather than using complicated model to fit a large number of eigen energy. At this sweet point, ideally, many conformal states and good conformal tower will emergy without entering the cost function.

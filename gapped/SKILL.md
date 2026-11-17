@@ -1,30 +1,17 @@
 ---
 name: gapped
-description: Diagnose fuzzy-sphere branches that may be massive, magnetoroton-like, or outside proposed CFT towers. Use when low-energy assignments disagree with conformal expectations or gap extrapolations need interpretation.
+description: give hints for possibly gapped states. Use when the spectrum behaves bad at critical point or find states violate the unitary bound.
 ---
 
-# Keep classifications evidence-based
+# general strategy
+If the state has large spin, such as $s>5$, which violates the unitary bound, it's usually harmless as long as we remember they are gapped states. If the spin is not too big, there is only one known case for me. You should not be limited to the known case.
 
-Neither high spin nor an apparent violation of a CFT unitarity bound establishes that a finite-size level is massive or harmless. Keep unexplained levels visible. A large-spin cutoff is not a physical classification rule.
+A most general strategy is to do a fitting. We fit the energy gap as $\Delta E=a+b/L$. $a\neq 0$ for gapped states and $a=0$ for the gapless one. But be careful, due to the finite size effect, the gapless states may also have $a=0$. Empirical observation is: if some $a$ are too big compared to others, it may be gapped; The smaller ones are then treated as gapless; but there must be at least one $a=0$ to signify the gapless critical point.
 
-Start with verified energies, a consistent vacuum, geometry, and symmetry labels from [ed-coding](../ed-coding/SKILL.md) and [conformal-quality](../conformal-quality/SKILL.md). Poor parameters, incorrect assignments, a different phase, and coexistence of critical and massive modes are distinct possibilities.
+# known cases
 
-# Compare raw gaps across sizes
+By now we only know one case. There is magneto-roton modes, which may seem to be low energy states even compared to the gapless CFT states. Several sign helps us to clarify:
+* We can use the single-mode approximation to get the trial wave function of the magneto-roton modes. To do this numerically, we tune the parameter deep inside the fQHE phase. Then we apply the roton creation operator to the fQHE ground state to get a roton state. We overlap the roton state to states at the critical point to test whether are roton mode.
+* Another way is to watch the flow of the spectrum. Starting from the fQHE phase, we chase the roton mode's energy to see if it flows to some low-lying state at critical point.
 
-Track candidate branches using quantum numbers, overlaps, and continuity rather than assuming a fixed energy rank denotes the same state. Compare at fixed physical couplings and state whether angular momentum or physical momentum is held fixed.
-
-A critical branch can behave as Delta E approximately v Delta/R, while a massive branch tends to a positive gap. Fits such as Delta E = a + b/R are exploratory, not universal massive dispersions. Finite-size corrections or branch switching can produce an apparent nonzero intercept for a gapless branch; a small fitted intercept can also leave a massive branch unresolved.
-
-Compare plausible correction forms and fit ranges when the independent sizes support them. For example, a 1/R^2 correction or a massive dispersion may be physically appropriate. At fixed angular momentum, physical momentum shrinks with R; tracking a finite-momentum roton minimum requires a different prescription. Do not infer gaplessness from the smallest fitted intercept, or demand a numerically exact zero from finite data.
-
-A massive branch may lie below the stress tensor at accessible sizes. Its raw-gap and overlap behavior can support that interpretation without establishing a thermodynamic mass. Even a correctly classified massive state still obstructs a clean low-energy spectrum while it remains below the target window.
-
-# Test a magnetoroton interpretation when relevant
-
-In a nearby fractional quantum Hall phase, apply an appropriate projected density harmonic to the phase's reference ground state to construct a single-mode trial excitation. Remove a ground-state component when necessary and normalize the trial vector before computing overlaps or spectral weights.
-
-At the same geometry, follow states or subspaces from the reference phase toward the candidate point. Refine parameter steps near avoided crossings and handle degeneracies as subspaces when individual eigenvectors are ambiguous. Record changes in rank and overlap quality.
-
-Combine reference-state overlaps, branch evolution, and size dependence. A density operator can couple to several branches. Adiabatic connection to a phase excitation alone does not prove a nonzero thermodynamic gap, and the relevant mode need not be the lowest state at its angular momentum.
-
-Use the [Chern-Simons-matter example](../plot/references/2507.19580v2.pdf) as a concrete diagnostic example, not a universal classification prescription. Return supported and unresolved interpretations to [tuning](../tuning/SKILL.md); do not silently remove disagreeing states to improve the cost.
+We can also combine the above method to get more solid answer. The magneto-roton mode may not be the lowest state in certain angular momentum.

@@ -1,27 +1,12 @@
 ---
 name: matrix-element
-description: Derive and verify fuzzy-sphere Hamiltonian and observable coefficients from real-space interactions or pseudopotentials. Use when implementing monopole-harmonic matrix elements and angular-momentum couplings.
+description: translate the Hamiltonian into matrix element code. Use when writing code to generate matrix element.
 ---
 
-# Make the Hamiltonian explicit
+# instruction
 
-Translate a schematic interaction into a form respecting the intended spatial rotations and internal symmetries. Use the monopole-harmonic identities and interaction examples in [On Monopole Harmonics](references/Notes.pdf) as needed. Spatial SO(3) invariance is distinct from full spacetime or conformal symmetry.
+The Hamiltonian you receive may just be a schematica one. You should write it into $SO(3)$ invariant form. To do it theoretically, read **/references/Notes.pdf**. If you still have problems or you find the Hamiltonian cannot be written into $SO(3)$ invariant and local in real space, ask first. The operator should always be in the normal order. You can use the julia package WignerSymbols to get the wigner3j symbol.
 
-State field statistics, layer monopole strengths, conserved charges, harmonic normalization, integration measure, radius factors, and coupling conventions. Specify whether a pseudopotential label denotes relative angular momentum r or total pair spin J; for LLL pair spins j1,j2, J = j1 + j2 - r, with the allowed channels restricted by statistics.
+# simple test
 
-State the operator ordering explicitly. Normal ordering can generate one-body terms or constants; retain these or explain the agreed convention rather than silently changing the Hamiltonian. Distinguish normalized pair projectors from density-interaction coefficients, and state any conversion between them.
-
-If the schematic model is ambiguous or incompatible with its intended symmetries or locality, explain the concrete issue and obtain the missing choice before substituting a different model. Existing authorization for Hamiltonian changes still applies.
-
-Use WignerSymbols.jl or another verified implementation for angular-momentum coefficients. Keep the coefficient construction reusable by Hamiltonian and observable builders; see [ed-coding](../ed-coding/SKILL.md).
-
-# Verify the implementation
-
-Choose checks relevant to the interaction:
-
-- Hermiticity when the physical Hamiltonian is Hermitian, including adjoints and complex phases. Do not impose it on an intentionally non-Hermitian model.
-- Charge and rotation selection rules, or commutators with the intended symmetry generators.
-- Independent small-system matrix elements or spectra, including isolated-pair pseudopotential eigenvalues where applicable.
-- An exactly solvable limit, when available.
-
-An exact zero-energy fractional quantum Hall ground state is a valid test only for the specified parent interaction, compatible flux and filling shift, and stated energy offset. It is not a property of every fractional-filling Hamiltonian. Distinguish a zero mode from a verified ground state and account for its expected multiplicity.
+If the provided Hamiltonian is Hermitian, we can test if the matrix element is Hermitian. The proposed Hamiltonian may be non-unitary and even complex, which cannot be tested using Hermitianlity. We can also test the $SO(3)$ spacetime symmetry and other global symmetries by the quantization of quantum number or by the commutativity with symmetry generators. Then there are not many other physical tests we can do. One important is the fractional filling state. If we turn off all other interactions, the fractional filling state will gain an exact $0$ as its ground state energy.

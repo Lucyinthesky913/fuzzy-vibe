@@ -1,39 +1,26 @@
 ---
 name: conformal-quality
-description: Assign fuzzy-sphere spectra to CFT multiplets and towers, define conformality costs, and assess conformal data. Use when testing state-operator correspondence or candidate spectral quality.
+description: the definition of the conformal quality. use when defining the cost function or test the quality of conformal symmetry.
 ---
 
-# Conformal towers
+# conformal tower
+In the sphere, the state-operator correspondence will make the energy gap $E-E_0 \propto v \Delta/R$, where $E_0$ is the ground state energy and $v$ is model-dependent (even sizes), $R$ is the radius and $\Delta$ is the scaling dimension. The primary field/state is the highest-weight representation of the conformal group. We can use conformal generators to raise the energy levels as $\Delta\to \Delta+n (n\in N)$, where we can call $n$ the descendant level. States/fields with $n> 0$ is the descants of the primary. For 3D CFT, the generators are just $\partial_1\partial_2\dots$. For example, a primary $\phi$ with spin-0 will have a $\partial \phi$ descendant with spin-1, a $\partial^2\phi$ with spin-0 and a $\partial_\mu\partial_\nu \phi$ with spin-2. The levels are $1,2,2$ correspondingly. There are infinte descendants. This structure, equal-space on the energy spectrum, is a strong sign for conformal symmetry and is easy to extract (compared to scaling behavior of correlation functions).
 
-For a relativistic CFT on a sphere, excitation energies approach E_n-E_0 = (v/R) Delta_n, with nonuniversal v and finite-size corrections in a microscopic realization. Use the actual vacuum, geometry, symmetry labels, and solver scope.
+Besides the tower structure, other signs are
+* If there is a continuous global symmetry at the critical point, the symmetry current must exist as a primary with scaling dimension $\Delta_J=d-2+j$ where $d=3$ is the spacetime dimension and $j$ is the spin of the current. For most cases, $j=1$ and $\Delta_J=2$. The lattice realization should just be the local symmetry operator.
+* All primaries should respect the global symmetry ($O(2)$, $Z_2$, $SO(5)$, etc.).
 
-Translations P_mu generate descendants and raise the scaling dimension by integers; special conformal generators K_mu annihilate a primary. In the local-operator description, translations act as derivatives. A generic scalar primary has a spin-one descendant at level one and a trace scalar and symmetric traceless spin-two descendant at level two. Apply the appropriate null-state subtractions for conserved or otherwise shortened multiplets.
 
-Primaries transform in representations of the global symmetry; they need not be singlets. Descendants remain in the primary's internal representation. Include spin, charges, internal representation, discrete symmetries where defined, and multiplicity when assigning states.
+# cost function and the quality of conformal symmetry
+A typical definition is
+$$\delta=\sum_{\{i\}}(\frac{E_{i'}-E_0}{E_T-E_0}3-\frac{E_{i}-E_0}{E_T-E_0}3-n_i)^2$$
+where $i$ is a primary's energy and $i'$ is its descendant. $E_T$ is the energy of the stree-energy tensor, whose dimension is known exactly as $\Delta=3$. We use it to cancel the factor $v$. This cost function picks out some energy levels to test the quality of the conformal symmetry. $\delta=0$ is the ideal result. Due to the finite size effects, we usually choose low-lying states.
 
-In a unitary three-dimensional CFT, a conserved internal current has Delta_J = 2 and a stress tensor has Delta_T = 3. A microscopic symmetry density can overlap with a current and other operators; its identification requires the appropriate quantum numbers and supporting evidence. Neither an energy match nor a large microscopic density overlap alone identifies a CFT operator.
+There are also other cost functions. For example, we can replace $\frac{3}{E_T-E_0}$ by $\alpha$ and add one additional term $[\alpha(E_T-E_0)-3]^2$. Then we need to also optimize $\alpha$. If we already know other scaling dimensions, for example, $\Delta=1.414$(3D Ising), we can further add $(\frac{E-E_0}{E_T-E_0}3-1.414)^2$ to encode some information a priori. Though it seems like cheat, it may largely increase the efficiency. We can also use it as a tentative search. Or we can use
+$$\delta=\sum_{\{i\}}(\frac{E_{i'}-E_0}{E_1-E_0}1.414-\frac{E_{i}-E_0}{E_1-E_0}1.414-n_i)^2+(\frac{E_T-E_0}{E_1-E_0}1.414-3)^2$$
+The most general definition is by choosing some reference state with known dimension to cancel the factor $v$.
 
-# Common normalization and assignments
+If you need a visulization on the conformal tower, use [plot skill] (./skills/plot/SKILL.md).
 
-Use one energy reference and one conversion factor alpha = R/v across the sectors and towers of the same candidate CFT at each geometry and coupling set. Record finite-size drift in alpha. For charged sectors, state any common chemical-potential subtraction; do not reset each sector's ground energy separately.
+It's possible some low-lying states are not CFT state or some states violate the unitary bound even if the theory is Hermitian/unitary. They may be gapped states from fQHE and other cases. Use [gapped skill] (./skills/gapped/SKILL.md) for hints. But you should think carefully whether they are gapped states or your parameters are too bad.
 
-Do not assume that the lowest spin-two level is T. Massive states may lie below it at accessible sizes. Keep competing assignments explicit and use symmetry, branch continuity, matrix elements, or Ward identities when available. For energy matching within a sector, each eigenstate should explain at most one target multiplet.
-
-A supported stress assignment permits alpha_T = 3/(E_T-E_0). Other choices include alpha_ref = Delta_ref/(E_ref-E_0) for an independently known reference dimension, or alpha_step = n/(E_desc-E_primary) for an assigned level-n descendant.
-
-When useful, compare these normalizations at fixed couplings and fixed assignments, using each scale consistently across all sectors. Do not retune the Hamiltonian or reassign states for each scale to make the comparison succeed. Scales calibrated from fitted relations are robustness checks, not independent validation. Report reference dimensions and their uncertainties as inputs; a fitted or imposed dimension is not a measured result.
-
-# Cost and spectral quality
-
-One possible cost is
-
-    C(alpha) = sum_pairs w_pd [alpha(E_d-E_p)-n]^2
-             + sum_protected w_a [alpha(E_a-E_0)-Delta_a]^2.
-
-Specify assignments, weights, sum versus mean, and whether alpha is fixed or fitted. A known nonprotected dimension may be used as a stated prior for a tentative search; a symbolic Delta_ref avoids importing one theory's approximate dimension into another.
-
-Inspect individual residuals. A zero cost only establishes the selected relations, not a CFT. Report unexplained levels and missing expected multiplets separately, or include explicit penalties whose definitions and windows are given. Boundary levels and uncertain assignments should remain distinguishable from supported matches.
-
-In a unitary 3D CFT, nonidentity scalar primaries have Delta >= 1/2 and integer-spin primaries with ell >= 1 have Delta >= ell+1. Apply these bounds to the appropriate primary representations, not independently to every descendant. An apparent violation by a normalized finite-size eigenvalue flags an assignment or finite-size issue, not a violation of microscopic Hermiticity.
-
-Use [gapped](../gapped/SKILL.md) for anomalous branches and [tuning](../tuning/SKILL.md) for independent checks and model selection. Where feasible, use operator matrix elements or conformal-generator tests beyond energies, reporting projection limits and retained spectral weight. Present both the full low spectrum and proposed families through [plot](../plot/SKILL.md).
