@@ -68,6 +68,7 @@ After finding the critical point, you should check if the phases far from the cr
 Be careful about unconscious reward-hacking. Several cases are known:
 * use too many parameters/interactions to fit/optimization a small number of states involved in the cost function
 * involving too many states in the cost function, making the conformal tower more like a result of brute force optimization rather than a true conformal structure.
+* concentrate too much in order to fit the value of the known primaries. This usually makes the conformal tower bad. Physically, the right scaling dimension will emerge as long as we find good conformal towers. So at least the conformal tower is equally (and even more) important as (to) the primaries' scaling dimensions.
 
 The key is to find sweet point for low lying states using simple model rather than using complicated model to fit a large number of eigen energy. At this sweet point, ideally, many conformal states and good conformal tower will emergy without entering the cost function.
 
