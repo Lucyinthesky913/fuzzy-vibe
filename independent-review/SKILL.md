@@ -5,6 +5,9 @@ description: hints for the independent reviewer. Use when the independent review
 
 # Standards for Good Data
 
+Beyond the following details, you should always be careful about the stability across different sizes.
+
+At least these details are important:
 * the cost function vanishes well, as least sits in a minimum.
 * the energy-momentum tensor and the current operator (if exists) can be clearly seen, with good scaling dimension.
 * the spectrum is sparse in low-lying states, for CFT states are often sparse.
@@ -12,3 +15,4 @@ description: hints for the independent reviewer. Use when the independent review
 * the conformal tower structure is clean. You can clearly see the conformal tower, rather than carefully picking a level (from dense spectrum or from many un-explained levels) that coincidentally fits the desired conformal descendant scaling dimension.
 * the low lying $L=0,1,2$ primary states along with their low lyting descandants are the most important. Primaries of larger scaling dimension or higher descandants of any primaries are less important due to numerical issues. Moreover, only low lying states (maybe with some descandants) shall enter the cost function. Primaries of larger scaling dimension or higher descandants of any primaries should not enter the cost function, which is to avoid over-fitting.
 * the quality of the OPE coefficients doesn't matter at all unless mentioned.
+* For good-enough low-lying states, a fitting of $\Delta E=a+b/L$ is needed. Ideally, these selected states' fitting parameter $a$ vanish well, as a strong sign of (gapless) criticality. But not all the models satisfy such condition. At least, the lowest scalar gap should satisfy it.

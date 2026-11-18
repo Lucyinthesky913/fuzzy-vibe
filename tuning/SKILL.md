@@ -47,7 +47,7 @@ In such cases, we should just run the optimization problem as mentioned in **irr
 
 # dependence on size and renormalization group running
 
-It's preferred that the final model's critical point is almost the same at different sizes. Because for an ideal fixed point, there is no scale-dependence. In other words, it will remain a fixed point for different sizes. It's also a sign that we successfully tune away almost all the finite-size effect.
+It's preferred that the final model's critical point is almost the same at different sizes. Because for an ideal fixed point, there is no scale-dependence. In other words, it will remain a fixed point for different sizes. It's also a sign that we successfully tune away almost all the finite-size effect. The mentioned gap-closing or $L\Delta E$ colliding behavior is another way to state this requirement: in a colliding point, the model becomes critical at the same point for at sizes.
 
 Not all the physical setup is good enough to reach such a result, so the above is just a preference and an ideal goal.
 
@@ -66,8 +66,12 @@ After finding the critical point, you should check if the phases far from the cr
 
 # to avoid reward-hacking
 Be careful about unconscious reward-hacking. Several cases are known:
-
 * use too many parameters/interactions to fit/optimization a small number of states involved in the cost function
 * involving too many states in the cost function, making the conformal tower more like a result of brute force optimization rather than a true conformal structure.
 
 The key is to find sweet point for low lying states using simple model rather than using complicated model to fit a large number of eigen energy. At this sweet point, ideally, many conformal states and good conformal tower will emergy without entering the cost function.
+
+In finding the critical point, a hacking case is known:
+* use conformal cost function to locate the critical point rather than gap closing.
+
+One will lose the true critical point using this strategy. This hacking-strategy can only serve as a rough search. Whether this point is critical must be tested via the gap-closing condition.
