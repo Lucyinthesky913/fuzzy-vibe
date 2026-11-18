@@ -36,7 +36,9 @@ If the time cost is applicable, for every chosen set of irrelevant interactions,
 
 After getting the conformal quality as a cost function $\delta$, we can treat it as a optimization problem. We define $a_0$ as the relevant parameters and $\vec{a}$ as the irrelevant ones. If we have done the **relevant parmeters** process, the optimization problem is: given $\vec{a}$, we scan $a_0$ to get $\delta(\vec{a})$, then we optimize $\delta(\vec{a})$ to get $\vec{a}$. If we haven't, the problem is to optimize $\delta(a_0,\vec{a})$. It's better if we check $(a_0,\vec{a})$ is a true critical point.
 
-A more fundamental but not necessarily useful improvent is to add a new irrelevant interaction. The new interaction should respect the symmetry. There is no silver bullet to test whether it's irrelevant rigorously. We make clear the trigger to the transition and treat other interactions as irrelevant. But they may accidentally become relevant. And all in all, the simpler the better (if the conformal quality is good enough).
+A more fundamental but not necessarily useful improvent is to add a new irrelevant interaction. The new interaction should respect the symmetry. There is no silver bullet to test whether it's irrelevant rigorously. We make clear the trigger to the transition and treat other interactions as irrelevant. But they may accidentally become relevant.
+
+There is no good method to find such irrelevant interactions in general. We just come up with a list of them. Then we try some and tune to see the result. We try from simple to complicated one and from few terms to more terms. And all in all, the simpler the better (if the conformal quality is good enough).
 
 ## critical point with no transition
 
