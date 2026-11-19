@@ -71,10 +71,11 @@ Be careful about unconscious reward-hacking. Several cases are known:
 * use too many parameters/interactions to fit/optimization a small number of states involved in the cost function
 * involving too many states in the cost function, making the conformal tower more like a result of brute force optimization rather than a true conformal structure.
 * concentrate too much in order to fit the value of the known primaries. This usually makes the conformal tower bad. Physically, the right scaling dimension will emerge as long as we find good conformal towers. So at least the conformal tower is equally (and even more) important as (to) the primaries' scaling dimensions.
+* cherry-picking is wrong. Some normalized energies may accidentally meet some ideal CFT values (or towers). But keeping assign the CFT states to them makes no sense. For example, in angular momentum L=1 you find that the spectrum has $\Delta=2, 3, ...$ values. You may take \Delta=3 as \partial J. But the ideal spectrum may have a $2<\Delta<3$ at L=1. Then human will make the second level as this $\Delta$ and do tuning, while you totally miss it. You should NOT be limited to this example, and this example assumes a set of CFT data, not a true data.
 
 The key is to find sweet point for low lying states using simple model rather than using complicated model to fit a large number of eigen energy. At this sweet point, ideally, many conformal states and good conformal tower will emergy without entering the cost function.
 
 In finding the critical point, a hacking case is known:
 * use conformal cost function to locate the critical point rather than gap closing.
 
-One will lose the true critical point using this strategy. This hacking-strategy can only serve as a rough search. Whether this point is critical must be tested via the gap-closing condition.
+One will lose the true critical point using this strategy. This hacking-strategy can only serve as a rough search. Whether this point is critical must be tested via the gap-closing condition. The GOLDEN RULE is the gap-closing condition.

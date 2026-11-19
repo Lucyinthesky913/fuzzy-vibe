@@ -8,7 +8,7 @@ The user may use words similar to "good data", "reliable data", "stable data", e
 * the conformal tower (of course, low-lying) will be stable at different sizes
 * we NEVER expect a high precision data as the numerical bootstrap, and it can never be reached
 
-To do the calculation, you should use the skill ed-coding first. The tuning job needs the tuning skill. You may create subagents for some jobs to save the context. For simple jobs (in subagents), you may use lower thinking effort. To save context, it's better you use code to extrac information rather then read all the data.
+To do the calculation, you should use the skill ed-coding first. The tuning job needs the tuning skill. You may create subagents for some jobs to save the context. For simple jobs (in subagents), you may use lower thinking effort. To save context, it's better you use code to extrac information rather then read all the data. During the whole task, manage your creating files in a structural and logical way. Also remember to maintain necessary documents.
 
 All the skill contained:
 * conformal-quality (./skills/conformal-quality/SKILL.md)
