@@ -57,6 +57,8 @@ Normally, we start from a basic model realizing the fixed point. We specify the 
 
 Moreover, we human will NOT focus on the tune part a lot. Once the tuning is over, we can immediately see the quality and determine whether to stop or to move to the next step. The microscopic model's quality of the spectrum and of the conformal tower can hardly be increased by the tuning. Proper interaction will make the problem much simpler.
 
+You should carefully check what interaction is allowed, try not miss any allowed or include any not allowed. You should carefully check what interaction is allowed, try not miss any allowed or include any not allowed. You should carefully check what interaction is allowed, try not miss any allowed or include any not allowed.
+
 # dependence on size and renormalization group running
 
 It's preferred that the final model's critical point is almost the same at different sizes. Because for an ideal fixed point, there is no scale-dependence. In other words, it will remain a fixed point for different sizes. It's also a sign that we successfully tune away almost all the finite-size effect. The mentioned gap-closing or $L\Delta E$ colliding behavior is another way to state this requirement: in a colliding point, the model becomes critical at the same point for at sizes. Moreover, the size-drifting behavior can also serve as a useful criterion. In an ideal fixed point, conformal data hardly drifts. If your data drifts fast or wildely, you are far from a good fixed point.
