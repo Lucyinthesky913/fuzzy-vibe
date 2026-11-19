@@ -38,7 +38,7 @@ After getting the conformal quality as a cost function $\delta$, we can treat it
 
 A more fundamental but not necessarily useful improvent is to add a new irrelevant interaction. The new interaction should respect the symmetry. There is no silver bullet to test whether it's irrelevant rigorously. We make clear the trigger to the transition and treat other interactions as irrelevant. But they may accidentally become relevant.
 
-There is no good method to find such irrelevant interactions in general. We just come up with a list of them. Then we try some and tune to see the result. We try from simple to complicated one and from few terms to more terms. And all in all, the simpler the better (if the conformal quality is good enough).
+There is no good method to find such irrelevant interactions in general. We just come up with a list of them. Then we try some and tune to see the result. We try from simple to complicated one and one term to more terms. And all in all, the simpler the better (if the conformal quality is good enough).
 
 ## critical point with no transition
 
@@ -46,10 +46,22 @@ For some special cases, such as super symmetric CFT, it may not serve as a trans
 
 In such cases, we should just run the optimization problem as mentioned in **irrelevant interactions**. We should optimize $\delta(a_0,\vec{a})$. Adding additional irrelevant interactions is still applicable.
 
+## human workflow in detail
+
+Normally, we start from a basic model realizing the fixed point. We specify the basic model's irrelevant parameters and also give a list of candidate irrelevant interactions. Then we do:
+* tune one irrelevant parameter/interaction and the relevant parameter to the fixed point
+* test the quality of the spectrum and conformal tower
+* if not good enough, we switch to tune another irrelevant parameter/interaction
+* repeat from the first step
+* if one-irrelevant family fails, we then try two, then three, then four... The irrelevant should be picked from the candidate list to keep a structural and logical workflow.
+
+Moreover, we human will NOT focus on the tune part a lot. Once the tuning is over, we can immediately see the quality and determine whether to stop or to move to the next step. The microscopic model's quality of the spectrum and of the conformal tower can hardly be increased by the tuning. Proper interaction will make the problem much simpler.
 
 # dependence on size and renormalization group running
 
 It's preferred that the final model's critical point is almost the same at different sizes. Because for an ideal fixed point, there is no scale-dependence. In other words, it will remain a fixed point for different sizes. It's also a sign that we successfully tune away almost all the finite-size effect. The mentioned gap-closing or $L\Delta E$ colliding behavior is another way to state this requirement: in a colliding point, the model becomes critical at the same point for at sizes. Moreover, the size-drifting behavior can also serve as a useful criterion. In an ideal fixed point, conformal data hardly drifts. If your data drifts fast or wildely, you are far from a good fixed point.
+
+The above paragraph states that you SHOULDN'T extrapolate the scaling dimension. The scaling dimension is ought to be STABLE and FLAT across different sizes.
 
 Not all the physical setup is good enough to reach such a result, so the above is just a preference and an ideal goal.
 
@@ -66,12 +78,17 @@ Not all the physical setup is good enough to reach such a result, so the above i
 
 After finding the critical point, you should check if the phases far from the critical point are still right. use [phase-check skill] (./skills/phase-check/SKILL.md).
 
+# lesson of universality
+
+Not all the data are universal. Conformal data are universal. The actual value of the critical relevant parameter and well-tuned irrelevant parameter is not. The torus parameters' values have nothing to do with that on sphere.
+
 # to avoid reward-hacking
 Be careful about unconscious reward-hacking. Several cases are known:
 * use too many parameters/interactions to fit/optimization a small number of states involved in the cost function
 * involving too many states in the cost function, making the conformal tower more like a result of brute force optimization rather than a true conformal structure.
 * concentrate too much in order to fit the value of the known primaries. This usually makes the conformal tower bad. Physically, the right scaling dimension will emerge as long as we find good conformal towers. So at least the conformal tower is equally (and even more) important as (to) the primaries' scaling dimensions.
 * cherry-picking is wrong. Some normalized energies may accidentally meet some ideal CFT values (or towers). But keeping assign the CFT states to them makes no sense. For example, in angular momentum L=1 you find that the spectrum has $\Delta=2, 3, ...$ values. You may take \Delta=3 as \partial J. But the ideal spectrum may have a $2<\Delta<3$ at L=1. Then human will make the second level as this $\Delta$ and do tuning, while you totally miss it. You should NOT be limited to this example, and this example assumes a set of CFT data, not a true data.
+* over-extrapolating: you are FORBIDDENED to extrapolate data withoug theoretical explanation.
 
 The key is to find sweet point for low lying states using simple model rather than using complicated model to fit a large number of eigen energy. At this sweet point, ideally, many conformal states and good conformal tower will emergy without entering the cost function.
 

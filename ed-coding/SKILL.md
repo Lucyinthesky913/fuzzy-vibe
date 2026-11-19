@@ -28,7 +28,7 @@ The module, or the core function, should at least accept:
 * quantum numbers if you need
 * other parameters you need
 
-If applicable, you are encouraged use SO(3)lver to accelerate the calculation. Another choice is to use the complete $SO(3)$ implemention in **/references/2609.11675v1.pdf**. You should use the most efficient way both in speed and memory-use.
+If applicable, you are HIGHLY encouraged use SO(3)lver to accelerate the calculation. Another choice is to use the complete $SO(3)$ implemention in **/references/2609.11675v1.pdf**. You should use the most efficient way both in speed and memory-use.
 
 ## other code
 You can use the core code as a module to get data to enable further calculation. The dmrg code, if you really need it, should be in another file since it's very different from the ED code.
