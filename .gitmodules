@@ -1,0 +1,3 @@
+[submodule "ed-coding/references/FuzzifiED"]
+	path = ed-coding/references/FuzzifiED
+	url = https://github.com/FuzzifiED/FuzzifiED.jl
