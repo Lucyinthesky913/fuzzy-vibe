@@ -1,6 +1,6 @@
 ---
 name: fuzzy-vibe
-description: list all the skills needed for the fuzzy sphere calculation. Use when explicitly called or a fuzzy sphere calculation is allowed and needed.
+description: list all the skills needed for the fuzzy sphere calculation. Use when explicitly called or a fuzzy sphere calculation is allowed and needed. And use when a task is finished as a checklist.
 ---
 
 The user may use words similar to "good data", "reliable data", "stable data", etc. The general standards are

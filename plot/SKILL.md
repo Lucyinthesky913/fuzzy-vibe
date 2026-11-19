@@ -1,6 +1,6 @@
 ---
 name: plot
-description: present examples and standards for plotting data. Use when a visualization is needed or presenting final data.
+description: present examples and standards for plotting data. Use when a visualization is needed or when presenting final data.
 ---
 
 To see examples in more detail, read **/references**.

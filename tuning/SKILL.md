@@ -7,7 +7,7 @@ description: tune parameters and interaction, test the quality of the candidate 
 
 **This is an example for your reference, about how humans search for the critical point.**
 
-We divide the process into three parts, the relevant parameters, the irrelevant interactions, and the critical point with no transition. To save context and maintain a stable agent's memory, it's encouraged to create a new subagent as an independent reviewer to review the result of tuning and give advice to next step, see **skills/indepdendent-review/SKILL.md**. If you need visulization, read **skills/plot/SKILL.md**.
+We divide the process into three parts, the relevant parameters, the irrelevant interactions, and the critical point with no transition. To save context and maintain a stable agent's memory, you should create a new subagent as an independent reviewer to review the result of tuning and give advice to next step, see **skills/indepdendent-review/SKILL.md**. If you need visulization, read **skills/plot/SKILL.md**.
 
 
 ## relevant parameters
