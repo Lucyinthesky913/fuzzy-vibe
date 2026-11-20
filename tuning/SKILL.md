@@ -38,7 +38,7 @@ After getting the conformal quality as a cost function $\delta$, we can treat it
 
 A more fundamental but not necessarily useful improvent is to add a new irrelevant interaction. The new interaction should respect the symmetry. There is no silver bullet to test whether it's irrelevant rigorously. We make clear the trigger to the transition and treat other interactions as irrelevant. But they may accidentally become relevant.
 
-There is no good method to find such irrelevant interactions in general. We just come up with a list of them. Then we try some and tune to see the result. We try from simple to complicated one and one term to more terms. And all in all, the simpler the better (if the conformal quality is good enough).
+There is no good method to find such irrelevant interactions in general. The philosophy is to think of the terms involving in the process of phase transition. But other terms like intra-layer pseudo-potential may also help, while it generally will not contribute the transition. We come up with a list of them. Then we try some and tune to see the result. We try from simple to complicated one and one term to more terms. And all in all, the simpler the better (if the conformal quality is good enough).
 
 ## critical point with no transition
 
